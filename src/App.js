@@ -1,12 +1,14 @@
 import './App.css';
+
 // context 
 import ProductContextProvider from './context/ProductContextProvider';
+import Shop from './components/Shop';
 
 function App() {
   return (
     <>
       <ProductContextProvider>
-          hi
+          <Shop />
       </ProductContextProvider>
     </>
   );
