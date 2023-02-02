@@ -1,8 +1,7 @@
 import React from 'react';
-import { shortTitle } from '../helper/functions';
+import { shortTitle } from '../../helper/functions';
 
 const Product = ({productData}) => {
-    console.log(productData);
     return (
         <div>
             <img src={productData.image}  alt={productData.title} width='200' />
