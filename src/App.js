@@ -1,14 +1,22 @@
 import './App.css';
+import { Switch, Route, Redirect} from 'react-router-dom';
 
 // context 
 import ProductContextProvider from './context/ProductContextProvider';
+
+// component 
 import Shop from './components/Shop';
+import ProductDetails from './components/ProductDetails';
 
 function App() {
   return (
     <>
       <ProductContextProvider>
-          <Shop />
+          <Switch>
+            <Route path="/products/:id" component={ProductDetails} />
+            <Route path="/products" component={Shop} />
+            <Redirect to="/products" />
+          </Switch>
       </ProductContextProvider>
     </>
   );
