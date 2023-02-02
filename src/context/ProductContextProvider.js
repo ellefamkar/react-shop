@@ -1,6 +1,9 @@
 import React, { useState, useEffect, createContext} from 'react';
-import { getProducts } from '../services/api';  //API
 
+// Get API
+import { getProducts } from '../services/api';
+
+// const ProductsContext = React.createContext()
 const ProductsContext = createContext();
 
 const ProductContextProvider = ({children}) => {
