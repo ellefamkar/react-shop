@@ -6,12 +6,12 @@ import { ProductsContext } from '../context/ProductContextProvider';
 const ProductDetails = (props) => {
     const id = props.match.params.id;
     const data = useContext(ProductsContext);
-    const product = data[id -1];
+    const product = data[id - 1];
     const {image, title, price, description, category} = product;
 
     return (
         <>
-            <img src={image} alt={title} />
+            <img src={image} alt={title} width='200' />
             <h2>{title}</h2>
             <p>Category : {category}</p>
             <p>
