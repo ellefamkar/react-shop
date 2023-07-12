@@ -1,5 +1,4 @@
 import React , {createContext, useReducer} from 'react';
-import { act } from 'react-dom/test-utils';
 
 // we use useReducer and createContext for cart 
 
