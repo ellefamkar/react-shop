@@ -7,15 +7,19 @@ import CartContextProvider from './context/CartContextProvider';
 // Component 
 import Shop from './components/Shop';
 import ProductDetails from './components/ProductDetails';
+import Navbar from './components/shared/Navbar';
+import ShopCart from './components/ShopCart';
 
 function App() {
   return (
     <>
       <ProductContextProvider>
         <CartContextProvider> 
+          <Navbar />
           <Switch>
             <Route path="/products/:id" component={ProductDetails} />
             <Route path="/products" component={Shop} />
+            <Route path="/cart" component={ShopCart} />
             <Redirect to="/products" />
           </Switch>
         </CartContextProvider>

@@ -13,9 +13,9 @@ const initialState = {
 // remove item -> only one item is available in cart 
 
 const sumItems = (items) =>{
-    const itemsCounter = items.reduce((total,product)=> total + product.quantity, 0); 
-    const total= items.reduce((total,product)=> total + product.price * product.quantity).toFixed(2);
-    return{itemsCounter, total};
+    const itemsCounter = items.reduce((total , product) => total + product.quantity, 0); 
+    const total= items.reduce((total , product) => total + product.price * product.quantity, 0).toFixed(2);
+    return {itemsCounter, total}
 }
 
 const cartReducer = (state, action) =>{
