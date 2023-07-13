@@ -28,9 +28,9 @@ Remember that "Every day is a learning day" and try to learn from everyone!
 
 ![](./src/assets/images/Screenshot-shop-react.png)
 
-### Links
+<!-- ### Links -->
 
-- Live Site URL: [React Sign Up | Login Form Application](https://melodic-cactus-7d3a19.netlify.app/)
+<!-- - Live Site URL: [React Sign Up | Login Form Application](https://melodic-cactus-7d3a19.netlify.app/) -->
 
 ## My process
 
