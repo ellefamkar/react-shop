@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 // icon 
 import cartIcon from "../../assets/icons/shop.svg";
 
+
 const Navbar = () => {
     const {state} = useContext(CartContext);
 

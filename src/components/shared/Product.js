@@ -24,6 +24,9 @@ const Product = ({productData}) => {
                     quantityCount(state, productData.id) === 1 &&  <button onClick={()=> dispatch({type: "REMOVE_ITEM", payload: productData})}><img src={trashIcon} alt='trash' style={{width: "15px"}} /></button>
                 }
                 {
+                    quantityCount(state, productData.id) > 0 && <span>{quantityCount(state, productData.id)}</span>
+                }
+                {
                     isInCart(state, productData.id) ?
                     <button onClick={()=> dispatch({type: "INCREASE", payload: productData})}>+</button> :
                     <button onClick={()=> dispatch({type: "ADD_ITEM", payload: productData})}>Add To Card</button>
