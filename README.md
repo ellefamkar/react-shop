@@ -41,146 +41,80 @@ The first think to do is to look for your perfect design! So let's checkout [dri
 ### Built with
 
 - Reactjs
-- React Toastify
-- Building custom hooks
-- Styled Components
+- Hooks
+- Contexts
+- Style modules
 - CSS
 - Flexbox
 - CSS Grid
-- Desktop-first workflow
-- CSS Animations
 
 You can use any tools you like to help you complete the project. So if you got something you'd like to practice, feel free to give it a try. However, i made it responsive for all the devices, since my users should be able to: View the optimal layout depending on their device's screen size
 
 ### What I learned
 
-This projects helped me being more familiar with the details of react, how to validate sign up and login forms and handle errors together with giving styles with Styled components, toastify and use my css knowledge as well to create a responsive project with small details on colors,sizes and so on.
+This projects helped me being more familiar with the details of react, how to work with hooks in cart and shop and handle errors together with giving styles through style modules and inline styles and use my css knowledge as well to create a responsive project with small details on colors,sizes and so on.
 
 To see parts of my codes and see how you can add code snippets, see below:
 
 ``` JSX
 
-const submitHandler = (event) => {
-      event.preventDefault();
-      notify();
-      if (!Object.keys(errors).length) {
-         notify("Successful", "success");
-      } else {
-         notify("Invalid", "error");
-         setTouched({
-            name: true,
-            email: true,
-            password: true,
-            confirmPassword: true,
-            select: true,
-            isAccepted: true,
-         });
-      }
-   };
+     
+import styles from "./Product.module.css";
 
-     const changeHandler = (event) => {
-      if (event.target.name === "isAccepted") {
-         setData({
-            ...data,
-            [event.target.name]: event.target.checked,
-         });
-      } else {
-         setData({
-            ...data,
-            [event.target.name]: event.target.value,
-         });
-         if (event.target.value) {
-            event.target.style.background = "#ffffff";
-            event.target.style.color = "#000000";
-         } else {
-            event.target.style.background = "transparent";
-            event.target.style.color = "transparent";
-         }
-      }
-   };
+const Product = ({productData}) => {
+
+    const {state, dispatch} = useContext(CartContext);
+
+    return (
+        <div className={styles.container}>
+            <img src={productData.image}  alt={productData.title} className={styles.cardImage} />
+            <h3>{shortTitle(productData.title)}</h3>
+            <p>{productData.price} $</p>
+            <div className={styles.linkContainer}>
+            <Link to={`/products/${productData.id}`}> details</Link>
+            <div className={styles.buttonContainer}>
+                {
+                    quantityCount(state, productData.id) > 1 &&  <button className={styles.decreseBtn} onClick={()=> dispatch({type: "DECREASE", payload: productData})}>-</button>
+                }
+                {
+                    quantityCount(state, productData.id) === 1 &&  <button className={styles.deleteBtn} onClick={()=> dispatch({type: "REMOVE_ITEM", payload: productData})}><img src={trashIcon} alt='trash'/></button>
+                }
+                {
+                    quantityCount(state, productData.id) > 0 && <span className={styles.counter}>{quantityCount(state, productData.id)}</span>
+                }
+                {
+                    isInCart(state, productData.id) ?
+                    <button className={styles.increaseBtn} onClick={()=> dispatch({type: "INCREASE", payload: productData})}>+</button> :
+                    <button className={styles.addToCartBtn} onClick={()=> dispatch({type: "ADD_ITEM", payload: productData})}>Add To Card</button>
+                }
+            </div>
+            </div>
+        </div>
+    );
+};
 
 ```
 ```css
 
-const FormContainer = styled.div`
-   background-color: rgba(0, 0, 34, 0.241);
-   border-radius: 10px;
-   width: 400px;
-   height: 500px;
-   padding: 2.5rem 2rem;
-   background: rgba(255, 255, 255, 0.2);
-   border-radius: 16px;
-   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-   backdrop-filter: blur(4.9px);
-   -webkit-backdrop-filter: blur(4.9px);
-   border: 1px solid rgba(255, 255, 255, 0.1);
-   z-index: 2;
-   text-align: center;
-   display: flex;
-   flex-direction: column;
-   align-items: center;
-   justify-content: space-between;
-   
-   h2 {
-      color: #ffffff;
-   }
-   p {
-      position: relative;
-      font-family: sans-serif;
-      text-transform: uppercase;
-      font-size: 1.6em;
-      letter-spacing: 4px;
-      overflow: hidden;
-      background: linear-gradient(103deg, #00128f, #fff, #000528);
-      background-repeat: no-repeat;
-      background-size: 80%;
-      animation: animate 5s linear infinite;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: rgba(225, 225, 225, 0.5);
-      margin-bottom: 1rem;
-   }
-
-   form {
-      width: 100%;
-      .buttonContainer{
-        width:50%;
-        margin:1rem auto 0.2rem auto;
-        display: flex;
-        flex-direction:row;
-       justify-content: space-between;
-       align-items: center;
-      }
-
-      button,
-      a {
-         cursor: pointer;
-         padding: 0.5rem 1rem;
-         border-radius: 5px;
-         border: none;
-         margin-top:1rem;
-       
-         &.signup {
-            background-color: #f09;
-            color: #ffffff;
-         }
-      }
-   }
-
-   & > div {
-      width: 50%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-   }
-
-   @keyframes animate {
-      0% {
-         background-position: -500%;
-      }
-      100% {
-         background-position: 500%;
-      }
-   }
+  .buttonContainer button {
+    background-color: black;
+    border: none;
+    color: #fff;
+    height: 28px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    width: 28px;
+    font-size: 1.6rem !important;
+    line-height: 24px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 4px 12px -2px,
+      rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+    margin-left: 5px;
+  }
+  
+  .buttonContainer img {
+    width: 20px;
+  }
 `;
 
 ```
