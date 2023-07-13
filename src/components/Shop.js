@@ -11,7 +11,7 @@ const Shop = () => {
     const products = useContext(ProductsContext);
 
     return (
-        <div style={{display:"flex", flexWrap:"wrap", gap:"20px", justifyContent:"space-between"}}>
+        <div style={{display:"flex", flexWrap:"wrap", gap:"10px", justifyContent:"center", alignItems:"center", maxWidth:"1120px", margin:"120px auto 100px"}}>
             {
                 products.map(product => <Product key={product.id} productData={product} />)
             }
